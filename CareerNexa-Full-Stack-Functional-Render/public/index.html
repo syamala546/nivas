@@ -1,1378 +1,1358 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>CareerNexa</title>
 
 <style>
-:root{
-  --p:#8b5cf6;
-  --k:#ec4899;
-  --bg:#faf7ff;
-  --ink:#30213f;
-  --line:#eadff3
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
-
-*{box-sizing:border-box}
 
 body{
-  margin:0;
-  background:radial-gradient(circle at 90% 0,#ffe8f3,transparent 28%),var(--bg);
-  font:15px system-ui;
-  color:var(--ink)
+  font-family:Inter,Arial,sans-serif;
+  background:#f8f7ff;
+  color:#242338;
 }
 
-button,input,select,textarea{font:inherit}
+button,input,textarea,select{
+  font:inherit;
+}
 
 button{
   cursor:pointer;
-  border:0;
-  border-radius:11px;
-  padding:10px 13px;
-  font-weight:700
 }
 
-.primary{
-  background:linear-gradient(120deg,var(--p),var(--k));
-  color:white
+.app{
+  display:flex;
+  min-height:100vh;
 }
 
-.soft{
-  background:#f2eaff;
-  color:#6d28d9
-}
+/* SIDEBAR */
 
-input,select,textarea{
-  width:100%;
-  padding:11px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:white
-}
-
-label{
-  display:block;
-  margin:12px 0 5px;
-  font-weight:700;
-  font-size:13px
-}
-
-.layout{
-  display:grid;
-  grid-template-columns:250px 1fr;
-  min-height:100vh
-}
-
-.side{
-  position:sticky;
+.sidebar{
+  width:250px;
+  background:linear-gradient(180deg,#8f2cff,#ff3f81);
+  color:white;
+  padding:25px 18px;
+  position:fixed;
+  left:0;
   top:0;
-  height:100vh;
+  bottom:0;
   overflow:auto;
-  background:#ffffffd9;
-  border-right:1px solid var(--line);
-  padding:20px 14px
 }
 
-.brand{
-  font-size:23px;
+.logo{
+  font-size:27px;
   font-weight:900;
-  padding:5px 10px 20px
+  margin-bottom:30px;
 }
 
-.brand b{color:var(--k)}
+.logo span{
+  color:#ffd6eb;
+}
 
-.group{
-  font-size:10px;
-  letter-spacing:1.5px;
-  color:#a197ad;
-  font-weight:900;
-  padding:16px 10px 5px
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
 }
 
 .nav button{
-  display:block;
-  text-align:left;
-  width:100%;
+  border:0;
   background:transparent;
-  color:#645873;
-  margin:3px 0
+  color:white;
+  text-align:left;
+  padding:13px 15px;
+  border-radius:12px;
+  transition:.2s;
 }
 
-.nav button.active,
-.nav button:hover{
-  background:linear-gradient(90deg,#f0e9ff,#fff0f7);
-  color:#6d28d9
+.nav button:hover,
+.nav button.active{
+  background:rgba(255,255,255,.2);
 }
+
+.logout{
+  margin-top:30px;
+  background:rgba(0,0,0,.2)!important;
+}
+
+/* MAIN */
 
 .main{
-  padding:26px;
-  max-width:1500px;
-  width:100%;
-  margin:auto
+  margin-left:250px;
+  width:calc(100% - 250px);
+  min-height:100vh;
 }
 
-.top{
+.topbar{
+  background:white;
+  padding:18px 28px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:20px
+  border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  z-index:5;
 }
 
-.top h1{margin:0}
+.userbox{
+  font-weight:700;
+}
 
-.card{
-  background:#ffffffdf;
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:19px;
-  margin-bottom:14px;
-  box-shadow:0 8px 25px #58366a08
+/* CONTENT */
+
+.content{
+  padding:30px;
+  max-width:1400px;
+  margin:auto;
 }
 
 .hero{
-  background:linear-gradient(120deg,#f1eaff,#fff0f7);
-  padding:28px;
-  border-radius:22px;
-  margin-bottom:18px
+  background:linear-gradient(135deg,#812cff,#ff4e8c);
+  color:white;
+  border-radius:25px;
+  padding:38px;
+  margin-bottom:25px;
 }
 
-.hero h2{
-  font-size:34px;
-  line-height:1.1;
-  margin:8px 0
+.hero h1{
+  font-size:38px;
+  margin-bottom:10px;
 }
+
+.hero p{
+  opacity:.9;
+  font-size:17px;
+}
+
+.search{
+  display:flex;
+  gap:10px;
+  margin-top:25px;
+}
+
+.search input{
+  flex:1;
+  padding:15px;
+  border:0;
+  border-radius:12px;
+  outline:0;
+}
+
+/* CARDS */
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:18px;
 }
 
-.muted{color:#786d83}
+.card{
+  background:white;
+  border:1px solid #eee;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 8px 25px rgba(60,30,100,.06);
+}
+
+.card h3{
+  margin-bottom:8px;
+}
+
+.muted{
+  color:#777;
+  font-size:14px;
+}
 
 .tag{
   display:inline-block;
-  background:#f3e8ff;
-  color:#7e22ce;
-  border-radius:99px;
-  padding:4px 8px;
-  font-size:11px;
-  margin:2px
+  background:#f0e8ff;
+  color:#6d20c9;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  margin:5px 4px 5px 0;
 }
 
-.job h3{margin:5px 0}
-
-.actions{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-  margin-top:12px
-}
-
-.toolbar{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr 1fr auto;
-  gap:8px;
-  margin:12px 0
-}
-
-.row{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:space-between
-}
-
-.notice{
-  background:#fff0f7;
-  color:#9d174d;
-  padding:12px;
+.btn{
+  border:0;
+  padding:11px 16px;
   border-radius:10px;
-  margin:12px 0
+  font-weight:700;
+  margin-top:12px;
 }
 
-.ok{
-  background:#ecfdf5;
-  color:#047857
+.primary{
+  background:#ff3f81;
+  color:white;
 }
 
-.hidden{display:none}
-
-.auth{
-  max-width:440px;
-  margin:8vh auto
+.secondary{
+  background:#eee7ff;
+  color:#6723c5;
 }
 
-.auth .card{padding:28px}
+.success{
+  background:#e4faed;
+  color:#08783d;
+}
 
-.list{
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  gap:10px;
+.danger{
+  background:#ffe7e7;
+  color:#b32121;
+}
+
+/* FORMS */
+
+.form{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  max-width:700px;
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:7px;
+  font-weight:700;
+}
+
+.field input,
+.field textarea,
+.field select{
+  width:100%;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  outline:none;
+}
+
+.field textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  justify-content:center;
   align-items:center;
-  justify-content:space-between
+  z-index:100;
+  padding:20px;
 }
 
-.list:last-child{border:0}
-
-.small{font-size:12px}
-
-@media(max-width:950px){
-  .grid{
-    grid-template-columns:repeat(2,minmax(0,1fr))
-  }
-
-  .toolbar{
-    grid-template-columns:1fr 1fr
-  }
+.modal.show{
+  display:flex;
 }
 
-@media(max-width:680px){
-  .layout{display:block}
+.modalbox{
+  width:100%;
+  max-width:480px;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  max-height:90vh;
+  overflow:auto;
+}
 
-  .side{
-    position:relative;
-    height:auto
-  }
+.tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:20px;
+}
 
-  .nav{
-    display:flex;
-    overflow:auto;
-    gap:4px
-  }
+.tabs button{
+  flex:1;
+  padding:11px;
+  border:0;
+  border-radius:10px;
+  background:#eee;
+}
 
-  .group{display:none}
+.tabs button.active{
+  background:#ff3f81;
+  color:white;
+}
 
-  .nav button{
-    white-space:nowrap;
-    width:auto
-  }
+/* TOAST */
 
-  .main{padding:14px}
+#toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:#222;
+  color:white;
+  padding:14px 20px;
+  border-radius:12px;
+  display:none;
+  z-index:200;
+}
 
-  .grid{
-    grid-template-columns:1fr
-  }
+#toast.show{
+  display:block;
+}
 
-  .toolbar{
-    grid-template-columns:1fr
-  }
+/* MOBILE */
 
-  .hero h2{
-    font-size:27px
-  }
+@media(max-width:800px){
+
+.sidebar{
+  width:75px;
+  padding:20px 8px;
+}
+
+.logo{
+  font-size:18px;
+  text-align:center;
+}
+
+.nav button{
+  font-size:0;
+  text-align:center;
+}
+
+.nav button::first-letter{
+  font-size:20px;
+}
+
+.main{
+  margin-left:75px;
+  width:calc(100% - 75px);
+}
+
+.content{
+  padding:18px;
+}
+
+.hero h1{
+  font-size:28px;
+}
+
 }
 </style>
 </head>
 
 <body>
 
-<div id="app"></div>
+<div class="app">
+
+<aside class="sidebar">
+
+<div class="logo">
+Career<span>Nexa</span>
+</div>
+
+<div class="nav">
+
+<button class="active" onclick="showPage('home',this)">
+🏠 Home
+</button>
+
+<button onclick="showPage('jobs',this)">
+💼 Jobs
+</button>
+
+<button onclick="showPage('applications',this)">
+📋 Applications
+</button>
+
+<button onclick="showPage('saved',this)">
+❤️ Saved Jobs
+</button>
+
+<button onclick="showPage('profile',this)">
+👤 Profile
+</button>
+
+<button onclick="showPage('resume',this)">
+📄 Resume Analyzer
+</button>
+
+<button onclick="showPage('interview',this)">
+🎤 Mock Interview
+</button>
+
+<button id="recruiterNav"
+style="display:none"
+onclick="showPage('recruiter',this)">
+🏢 Recruiter
+</button>
+
+<button id="adminNav"
+style="display:none"
+onclick="showPage('admin',this)">
+🛡️ Admin
+</button>
+
+<button class="logout" onclick="logout()">
+🚪 Logout
+</button>
+
+</div>
+
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+
+<div>
+<strong>CareerNexa</strong>
+</div>
+
+<div class="userbox" id="userBox">
+Not logged in
+</div>
+
+</header>
+
+<div class="content" id="content"></div>
+
+</main>
+
+</div>
+
+
+<!-- LOGIN / REGISTER -->
+
+<div class="modal" id="authModal">
+
+<div class="modalbox">
+
+<h2 style="margin-bottom:20px">
+Welcome to CareerNexa
+</h2>
+
+<div class="tabs">
+
+<button
+id="loginTab"
+class="active"
+onclick="switchAuth('login')">
+Login
+</button>
+
+<button
+id="registerTab"
+onclick="switchAuth('register')">
+Create Account
+</button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="loginForm">
+
+<div class="field">
+<label>Email</label>
+<input
+id="loginEmail"
+type="email"
+placeholder="Enter email">
+</div>
+
+<div class="field">
+<label>Password</label>
+<input
+id="loginPassword"
+type="password"
+placeholder="Enter password">
+</div>
+
+<button
+class="btn primary"
+onclick="login()">
+Login
+</button>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<div id="registerForm" style="display:none">
+
+<div class="field">
+<label>Name</label>
+<input
+id="regName"
+placeholder="Your full name">
+</div>
+
+<div class="field">
+<label>Mobile Number</label>
+<input
+id="regMobile"
+placeholder="10 digit mobile number">
+</div>
+
+<div class="field">
+<label>Email</label>
+<input
+id="regEmail"
+type="email"
+placeholder="Email address">
+</div>
+
+<div class="field">
+<label>Password</label>
+<input
+id="regPassword"
+type="password"
+placeholder="Minimum 6 characters">
+</div>
+
+<div class="field">
+
+<label>Account Type</label>
+
+<select id="regRole">
+
+<option value="candidate">
+Candidate / Job Seeker
+</option>
+
+<option value="recruiter">
+Recruiter / Company
+</option>
+
+</select>
+
+</div>
+
+<button
+class="btn primary"
+onclick="register()">
+Create Account
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="toast"></div>
+
 
 <script>
 
-const $=s=>document.querySelector(s);
+let token = localStorage.getItem("cn_token");
 
-const esc=s=>String(s??"").replace(
-  /[&<>"']/g,
-  c=>({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  }[c])
-);
-
-let token=localStorage.cnToken||"";
-let user=null;
-let profile={};
-let jobs=[];
-let saved=[];
-let apps=[];
-let page="Home";
+let me = null;
+let jobs = [];
+let saved = [];
+let applications = [];
 
 
-/* =========================
-   API HELPER
-========================= */
+/* =====================================================
+API
+===================================================== */
 
-async function api(url,opt={}){
-  let h={...(opt.headers||{})};
+async function api(url,options={}){
+
+  const headers = options.headers || {};
+
+  if(!(options.body instanceof FormData)){
+    headers["Content-Type"] =
+      headers["Content-Type"] ||
+      "application/json";
+  }
 
   if(token){
-    h.Authorization="Bearer "+token;
+    headers.Authorization =
+      "Bearer " + token;
   }
 
-  if(
-    opt.body &&
-    !(opt.body instanceof FormData)
-  ){
-    h["Content-Type"]="application/json";
-  }
-
-  let r;
-
-  try{
-    r=await fetch(url,{
-      ...opt,
-      headers:h
-    });
-  }catch(e){
-    throw Error("Unable to connect to server.");
-  }
-
-  let d;
-
-  try{
-    d=await r.json();
-  }catch{
-    d={};
-  }
-
-  if(!r.ok){
-    throw Error(d.error||"Request failed");
-  }
-
-  return d;
-}
-
-
-/* =========================
-   LOGIN / REGISTER
-========================= */
-
-function auth(mode="login"){
-
-  let reg=mode==="register";
-
-  $("#app").innerHTML=`
-    <div class="auth">
-      <div class="card">
-
-        <div class="brand">
-          Career<b>Nexa</b> ✦
-        </div>
-
-        <h1>${reg?"Create account":"Welcome back"}</h1>
-
-        <p class="muted">
-          ${reg
-            ?"Start building your career profile."
-            :"Log in to your career workspace."
-          }
-        </p>
-
-        <div id="msg" class="notice hidden"></div>
-
-        <form id="form">
-
-          ${
-            reg
-            ?'<label>Name</label><input name="name" required>'
-            :""
-          }
-
-          <label>Email</label>
-
-          <input
-            name="email"
-            type="email"
-            required
-          >
-
-          <label>Password</label>
-
-          <input
-            name="password"
-            type="password"
-            minlength="8"
-            required
-          >
-
-          <button
-            class="primary"
-            style="width:100%;margin-top:16px"
-          >
-            ${reg?"Create account":"Log in"}
-          </button>
-
-        </form>
-
-        <p>
-          ${reg?"Already have an account?":"New here?"}
-          <a href="#" id="switch">
-            ${reg?"Log in":"Create account"}
-          </a>
-        </p>
-
-      </div>
-    </div>
-  `;
-
-  $("#switch").onclick=e=>{
-    e.preventDefault();
-    auth(reg?"login":"register");
-  };
-
-  $("#form").onsubmit=async e=>{
-
-    e.preventDefault();
-
-    try{
-
-      let d=await api(
-        "/api/"+(reg?"register":"login"),
-        {
-          method:"POST",
-          body:JSON.stringify(
-            Object.fromEntries(
-              new FormData(e.target)
-            )
-          )
-        }
-      );
-
-      token=d.token;
-
-      localStorage.cnToken=token;
-
-      user=d.user;
-
-      await load();
-
-      render();
-
-    }catch(x){
-
-      $("#msg").textContent=x.message;
-
-      $("#msg").classList.remove("hidden");
-
-    }
-
-  };
-
-}
-
-
-/* =========================
-   LOAD DATA
-========================= */
-
-async function load(){
-
-  [user,jobs,saved,apps]=await Promise.all([
-    api("/api/me"),
-    api("/api/jobs"),
-    api("/api/saved"),
-    api("/api/applications")
-  ]);
-
-  profile=user;
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-const nav=[
-  ["WORKSPACE","Home","Find Jobs","Saved Jobs","Applications"],
-  ["GROW","Resume AI","Interview Prep","Skill Gap","Learning Hub","Career Roadmap"],
-  ["TOOLS","Resume Builder","Portfolio","Career Analytics","AI Career Coach"],
-  ["ACCOUNT","Profile","Log out"]
-];
-
-
-/* =========================
-   MAIN SHELL
-========================= */
-
-function shell(body){
-
-  $("#app").innerHTML=`
-
-    <div class="layout">
-
-      <aside class="side">
-
-        <div class="brand">
-          Career<b>Nexa</b> ✦
-        </div>
-
-        <div class="nav">
-
-          ${nav.map(g=>`
-
-            <div class="group">
-              ${g[0]}
-            </div>
-
-            ${g.slice(1).map(n=>`
-
-              <button
-                data-page="${n}"
-                class="${page===n?"active":""}"
-              >
-
-                ${
-                  ({
-                    "Home":"⌂",
-                    "Find Jobs":"⌕",
-                    "Saved Jobs":"♡",
-                    "Applications":"▤",
-                    "Resume AI":"▧",
-                    "Interview Prep":"◉",
-                    "Skill Gap":"◇",
-                    "Learning Hub":"▱",
-                    "Career Roadmap":"↗",
-                    "Resume Builder":"✎",
-                    "Portfolio":"▣",
-                    "Career Analytics":"▥",
-                    "AI Career Coach":"✧",
-                    "Profile":"◎",
-                    "Log out":"↪"
-                  })[n]
-                }
-
-                &nbsp; ${n}
-
-              </button>
-
-            `).join("")}
-
-          `).join("")}
-
-        </div>
-
-      </aside>
-
-      <main class="main">
-
-        <div class="top">
-
-          <h1>${esc(page)}</h1>
-
-          <span class="tag">
-            ${esc(user.name||user.email)}
-          </span>
-
-        </div>
-
-        <div id="toast" class="notice hidden"></div>
-
-        ${body}
-
-      </main>
-
-    </div>
-  `;
-
-
-  document
-    .querySelectorAll("[data-page]")
-    .forEach(b=>{
-
-      b.onclick=()=>{
-
-        if(b.dataset.page==="Log out"){
-
-          token="";
-
-          localStorage.removeItem("cnToken");
-
-          user=null;
-
-          auth();
-
-          return;
-        }
-
-        page=b.dataset.page;
-
-        render();
-
-      };
-
+  const response =
+    await fetch(url,{
+      ...options,
+      headers
     });
 
+  const text =
+    await response.text();
+
+  let data={};
+
+  try{
+    data =
+      text ? JSON.parse(text) : {};
+  }
+  catch{
+    data={error:text};
+  }
+
+  if(!response.ok){
+    throw new Error(
+      data.error ||
+      "Something went wrong"
+    );
+  }
+
+  return data;
 }
 
 
-/* =========================
-   JOB CARD
-========================= */
+/* =====================================================
+TOAST
+===================================================== */
 
-function job(j){
+function toast(message){
 
-  const alreadyApplied=
-    apps.some(a=>Number(a.job_id)===Number(j.id));
+  const box =
+    document.getElementById("toast");
 
-  return `
+  box.textContent = message;
 
-    <div class="card job">
+  box.classList.add("show");
 
-      <span class="tag">
-        ${esc(j.level)}
-      </span>
+  setTimeout(()=>{
+    box.classList.remove("show");
+  },3500);
 
-      <h3>
-        ${esc(j.title)}
-      </h3>
-
-      <div class="muted">
-        ${esc(j.company)} · ${esc(j.location)}
-      </div>
-
-      <p>
-        ${esc(j.description)}
-      </p>
-
-      <div>
-
-        ${j.skills.map(s=>`
-          <span class="tag">
-            ${esc(s)}
-          </span>
-        `).join("")}
-
-      </div>
-
-      <p>
-        <b>${esc(j.salary)}</b>
-        ·
-        ${esc(j.type)}
-      </p>
-
-      <div class="actions">
-
-        <button
-          class="primary"
-          data-apply="${j.id}"
-          ${alreadyApplied?"disabled":""}
-        >
-          ${alreadyApplied
-            ?"✅ Applied"
-            :"Apply / Track"
-          }
-        </button>
-
-        <button
-          class="soft"
-          data-save="${j.id}"
-        >
-          ${
-            saved.includes(j.id)
-            ?"♥ Saved"
-            :"♡ Save"
-          }
-        </button>
-
-        <button
-          class="soft"
-          data-match="${j.id}"
-        >
-          Match
-        </button>
-
-      </div>
-
-    </div>
-  `;
 }
 
 
-/* =========================
-   HOME
-========================= */
+/* =====================================================
+INIT
+===================================================== */
 
-function home(){
+async function init(){
 
-  return `
+  if(!token){
 
-    <div class="hero">
+    document
+      .getElementById("authModal")
+      .classList.add("show");
 
-      <span class="tag">
-        YOUR CAREER, YOUR NEXT MOVE
-      </span>
+    renderWelcome();
 
-      <h2>
-        Grow your career with confidence.
-      </h2>
+    return;
+  }
+
+  try{
+
+    me =
+      await api("/api/me");
+
+    await loadData();
+
+    updateUser();
+
+    setupRoleNav();
+
+    showPage("home");
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    logout();
+
+  }
+
+}
+
+
+async function loadData(){
+
+  jobs =
+    await api("/api/jobs");
+
+  if(me.role === "candidate"){
+
+    saved =
+      await api("/api/saved");
+
+    applications =
+      await api("/api/applications");
+
+  }
+
+}
+
+
+/* =====================================================
+WELCOME
+===================================================== */
+
+function renderWelcome(){
+
+  document.getElementById("content").innerHTML = `
+
+    <section class="hero">
+
+      <h1>
+        Welcome to CareerNexa 🚀
+      </h1>
 
       <p>
-        Discover jobs, track applications,
-        improve your resume, and practice interviews.
+        Your complete career platform for finding jobs,
+        applying to companies, tracking applications
+        and preparing for interviews.
       </p>
 
       <button
-        class="primary"
-        data-page="Find Jobs"
-      >
-        Explore jobs →
+        class="btn primary"
+        onclick="document.getElementById('authModal').classList.add('show')">
+
+        Login / Create Account
+
       </button>
 
-    </div>
-
-
-    <div class="grid">
-
-      <div class="card">
-        <b>${saved.length}</b>
-        <div class="muted">
-          Saved jobs
-        </div>
-      </div>
-
-      <div class="card">
-        <b>${apps.length}</b>
-        <div class="muted">
-          Applications
-        </div>
-      </div>
-
-      <div class="card">
-        <b>
-          ${
-            (profile.skills||"")
-            .split(",")
-            .filter(Boolean)
-            .length
-          }
-        </b>
-
-        <div class="muted">
-          Profile skills
-        </div>
-      </div>
-
-    </div>
-
-
-    <h2>
-      Fresher-friendly jobs
-    </h2>
+    </section>
 
     <div class="grid">
 
-      ${
-        jobs
-          .filter(
-            j=>j.level==="Fresher"||
-               j.level==="0–1 years"
-          )
-          .slice(0,3)
-          .map(job)
-          .join("")
-      }
-
-    </div>
-  `;
-}
-
-
-/* =========================
-   JOB SEARCH
-========================= */
-
-function jobsPage(){
-
-  return `
-
-    <div class="card">
-
-      <h2>
-        Find jobs
-      </h2>
-
-      <p class="muted">
-        Sample jobs are included.
-        Connect a live job provider to show
-        real-time vacancies.
-      </p>
-
-
-      <div class="toolbar">
-
-        <input
-          id="q"
-          placeholder="Search role or skill"
-        >
-
-        <select id="level">
-
-          <option value="">
-            All experience
-          </option>
-
-          <option>
-            Fresher
-          </option>
-
-          <option>
-            0–1 years
-          </option>
-
-          <option>
-            2+ years
-          </option>
-
-        </select>
-
-
-        <input
-          id="loc"
-          placeholder="Location"
-        >
-
-
-        <select id="type">
-
-          <option value="">
-            All types
-          </option>
-
-          <option>
-            Internship
-          </option>
-
-          <option>
-            Full-time
-          </option>
-
-          <option>
-            Trainee
-          </option>
-
-        </select>
-
-
-        <button
-          class="primary"
-          id="search"
-        >
-          Search
-        </button>
-
-      </div>
-
-
-      <div
-        id="results"
-        class="grid"
-      >
-        ${jobs.map(job).join("")}
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* =========================
-   APPLICATIONS
-========================= */
-
-function applications(){
-
-  return `
-
-    <div class="card">
-
-      <h2>
-        Application tracker
-      </h2>
-
-      ${
-        apps.length
-
-        ?
-
-        apps.map(a=>`
-
-          <div class="list">
-
-            <div>
-
-              <b>
-                ${esc(a.job?.title||"Job")}
-              </b>
-
-              <div class="muted small">
-                ${esc(a.job?.company||"")}
-              </div>
-
-            </div>
-
-
-            <select
-              data-status="${a.id}"
-              style="max-width:140px"
-            >
-
-              ${
-                [
-                  "Applied",
-                  "Assessment",
-                  "Interview",
-                  "Offer",
-                  "Rejected",
-                  "Withdrawn"
-                ]
-                .map(
-                  s=>`
-                    <option
-                      ${a.status===s?"selected":""}
-                    >
-                      ${s}
-                    </option>
-                  `
-                )
-                .join("")
-              }
-
-            </select>
-
-
-            <button
-              data-delete="${a.id}"
-              class="soft"
-            >
-              Remove
-            </button>
-
-          </div>
-
-        `).join("")
-
-        :
-
-        "No applications yet. Apply to a job to track it."
-
-      }
-
-    </div>
-  `;
-}
-
-
-/* =========================
-   PROFILE
-========================= */
-
-function profilePage(){
-
-  return `
-
-    <div class="card">
-
-      <h2>
-        Your profile
-      </h2>
-
-      <form id="pf">
-
-        <label>
-          Name
-        </label>
-
-        <input
-          name="name"
-          value="${esc(profile.name)}"
-        >
-
-
-        <label>
-          Experience
-        </label>
-
-        <select name="experience">
-
-          <option
-            ${profile.experience==="Fresher"?"selected":""}
-          >
-            Fresher
-          </option>
-
-          <option>
-            Experienced
-          </option>
-
-          <option>
-            Career Switch
-          </option>
-
-          <option>
-            Internship
-          </option>
-
-        </select>
-
-
-        <label>
-          Target role
-        </label>
-
-        <input
-          name="role"
-          value="${esc(profile.role||"")}"
-        >
-
-
-        <label>
-          Location
-        </label>
-
-        <input
-          name="location"
-          value="${esc(profile.location||"")}"
-        >
-
-
-        <label>
-          Skills (comma-separated)
-        </label>
-
-        <textarea
-          name="skills"
-          rows="3"
-        >${esc(profile.skills||"")}</textarea>
-
-
-        <button class="primary">
-          Save profile
-        </button>
-
-      </form>
-
-    </div>
-  `;
-}
-
-
-/* =========================
-   OTHER FEATURES
-========================= */
-
-function other(){
-
-  if(page==="Resume AI")
-
-    return `
-
       <div class="card">
-
-        <h2>
-          Resume analyzer
-        </h2>
-
+        <h3>💼 Real Jobs</h3>
         <p class="muted">
-          Upload PDF/DOC/TXT up to 5 MB.
-          Basic text checks work for TXT/MD;
-          PDF/DOCX upload is recorded but needs
-          a parser for text extraction.
+          Discover job opportunities posted on CareerNexa.
         </p>
-
-        <form id="resume">
-
-          <input
-            type="file"
-            name="resume"
-            required
-            accept=".pdf,.doc,.docx,.txt,.md"
-          >
-
-          <button
-            class="primary"
-            style="margin-top:12px"
-          >
-            Analyze
-          </button>
-
-        </form>
-
-        <div id="out"></div>
-
       </div>
-    `;
-
-
-  if(page==="Interview Prep")
-
-    return `
 
       <div class="card">
-
-        <h2>
-          Mock interview practice
-        </h2>
-
-        <p>
-          Answer five questions, then receive
-          a practice score and feedback.
+        <h3>📋 Application Tracker</h3>
+        <p class="muted">
+          Track your application status from Applied
+          to Interview and Selection.
         </p>
-
-        <div id="questions">
-
-          <b id="question"></b>
-
-          <textarea
-            id="answer"
-            rows="5"
-          ></textarea>
-
-          <button
-            class="primary"
-            id="next"
-          >
-            Save & next
-          </button>
-
-        </div>
-
-        <div id="result"></div>
-
       </div>
-    `;
-
-
-  if(page==="Skill Gap")
-
-    return `
 
       <div class="card">
-
-        <h2>
-          Skill gap analyzer
-        </h2>
-
-        <label>
-          Skills you have
-        </label>
-
-        <input
-          id="have"
-          value="${esc(
-            profile.skills||
-            "HTML, CSS, JavaScript, React"
-          )}"
-        >
-
-        <label>
-          Target job skills
-        </label>
-
-        <input
-          id="need"
-          value="HTML, CSS, JavaScript, React, TypeScript, Testing"
-        >
-
-        <button
-          id="compare"
-          class="primary"
-        >
-          Compare skills
-        </button>
-
-        <div id="gap"></div>
-
+        <h3>📄 Resume Analyzer</h3>
+        <p class="muted">
+          Upload your resume and identify areas
+          that can be improved.
+        </p>
       </div>
-    `;
 
-
-  let desc={
-
-    "Learning Hub":
-      "Build a weekly plan: learn a concept, practice it, then build a small project.",
-
-    "Career Roadmap":
-      "Choose a role → identify skills → build projects → improve resume → practice interviews → apply and track.",
-
-    "Resume Builder":
-      "Create a resume with contact details, summary, education, skills, projects, and achievements. Tailor it to each job.",
-
-    "Portfolio":
-      "Showcase 2–3 projects, your role, tools used, outcomes, skills, and contact links.",
-
-    "Career Analytics":
-      `You have saved ${saved.length} jobs and tracked ${apps.length} applications. Update statuses to keep your progress accurate.`,
-
-    "AI Career Coach":
-      "Use this guided planner to create next steps. This starter does not connect to a generative AI API."
-
-  };
-
-
-  return `
-
-    <div class="card">
-
-      <h2>
-        ${esc(page)}
-      </h2>
-
-      <p>
-        ${esc(
-          desc[page]||
-          "Update your career profile and explore relevant opportunities."
-        )}
-      </p>
-
-      ${
-        page==="AI Career Coach"
-
-        ?
-
-        `
-          <form id="coach">
-
-            <label>
-              What do you need help with?
-            </label>
-
-            <textarea
-              name="q"
-              rows="3"
-              placeholder="I am a fresher looking for frontend jobs..."
-            ></textarea>
-
-            <button class="primary">
-              Get a plan
-            </button>
-
-          </form>
-
-          <div id="coachout"></div>
-        `
-
-        :
-
-        `
-          <button
-            class="primary"
-            data-page="Find Jobs"
-          >
-            Explore jobs
-          </button>
-
-          <button
-            class="soft"
-            data-page="Profile"
-          >
-            Update profile
-          </button>
-        `
-      }
+      <div class="card">
+        <h3>🎤 Mock Interview</h3>
+        <p class="muted">
+          Practice interview questions before the real interview.
+        </p>
+      </div>
 
     </div>
+
   `;
+
 }
 
 
-/* =========================
-   INTERVIEW
-========================= */
+/* =====================================================
+AUTH
+===================================================== */
 
-let qi=0;
+function switchAuth(type){
 
-let answers=[];
+  document.getElementById("loginForm").style.display =
+    type === "login"
+    ? "block"
+    : "none";
 
-let questions=[
-  "Tell me about yourself.",
-  "Describe a project you are proud of.",
-  "What technical challenge did you solve?",
-  "Why this role?",
-  "What are you improving?"
-];
+  document.getElementById("registerForm").style.display =
+    type === "register"
+    ? "block"
+    : "none";
+
+  document
+    .getElementById("loginTab")
+    .classList.toggle(
+      "active",
+      type === "login"
+    );
+
+  document
+    .getElementById("registerTab")
+    .classList.toggle(
+      "active",
+      type === "register"
+    );
+
+}
 
 
-/* =========================
-   RENDER
-========================= */
-
-async function render(){
-
-  if(!token){
-    auth();
-    return;
-  }
+async function login(){
 
   try{
 
-    if(!user)
-      await load();
+    const data =
+      await api("/api/login",{
+        method:"POST",
+        body:JSON.stringify({
 
-  }catch{
+          email:
+            document
+              .getElementById("loginEmail")
+              .value,
 
-    token="";
+          password:
+            document
+              .getElementById("loginPassword")
+              .value
 
-    localStorage.removeItem("cnToken");
+        })
+      });
 
-    auth();
+    token =
+      data.token;
+
+    localStorage.setItem(
+      "cn_token",
+      token
+    );
+
+    me =
+      data.user;
+
+    document
+      .getElementById("authModal")
+      .classList.remove("show");
+
+    await loadData();
+
+    updateUser();
+
+    setupRoleNav();
+
+    showPage("home");
+
+    toast("✅ Login successful");
+
+  }
+  catch(error){
+
+    toast("❌ " + error.message);
+
+  }
+
+}
+
+
+async function register(){
+
+  try{
+
+    const data =
+      await api("/api/register",{
+        method:"POST",
+        body:JSON.stringify({
+
+          name:
+            document
+              .getElementById("regName")
+              .value,
+
+          mobile:
+            document
+              .getElementById("regMobile")
+              .value,
+
+          email:
+            document
+              .getElementById("regEmail")
+              .value,
+
+          password:
+            document
+              .getElementById("regPassword")
+              .value,
+
+          role:
+            document
+              .getElementById("regRole")
+              .value
+
+        })
+      });
+
+    token =
+      data.token;
+
+    localStorage.setItem(
+      "cn_token",
+      token
+    );
+
+    me =
+      data.user;
+
+    document
+      .getElementById("authModal")
+      .classList.remove("show");
+
+    await loadData();
+
+    updateUser();
+
+    setupRoleNav();
+
+    showPage("home");
+
+    toast("🎉 Account created successfully");
+
+  }
+  catch(error){
+
+    toast("❌ " + error.message);
+
+  }
+
+}
+
+
+function logout(){
+
+  localStorage.removeItem(
+    "cn_token"
+  );
+
+  token=null;
+  me=null;
+
+  location.reload();
+
+}
+
+
+function updateUser(){
+
+  document
+    .getElementById("userBox")
+    .textContent =
+      me
+      ? `${me.name} • ${me.role}`
+      : "Not logged in";
+
+}
+
+
+function setupRoleNav(){
+
+  document
+    .getElementById("recruiterNav")
+    .style.display =
+      me.role === "recruiter"
+      ? "block"
+      : "none";
+
+  document
+    .getElementById("adminNav")
+    .style.display =
+      me.role === "admin"
+      ? "block"
+      : "none";
+
+}
+
+
+/* =====================================================
+NAVIGATION
+===================================================== */
+
+function showPage(page,button){
+
+  if(!me){
+    document
+      .getElementById("authModal")
+      .classList.add("show");
 
     return;
   }
 
+  if(button){
 
-  let body=
+    document
+      .querySelectorAll(".nav button")
+      .forEach(x=>
+        x.classList.remove("active")
+      );
 
-    page==="Home"
-      ?home()
+    button.classList.add("active");
 
-    :page==="Find Jobs"
-      ?jobsPage()
+  }
 
-    :page==="Saved Jobs"
-      ?`
-        <div class="grid">
+  if(page==="home")
+    renderHome();
 
-          ${
-            jobs
-              .filter(j=>saved.includes(j.id))
-              .map(job)
-              .join("")
-            ||
-            '<div class="card">No saved jobs yet.</div>'
-          }
+  if(page==="jobs")
+    renderJobs();
 
-        </div>
-      `
+  if(page==="applications")
+    renderApplications();
 
-    :page==="Applications"
-      ?applications()
+  if(page==="saved")
+    renderSaved();
 
-    :page==="Profile"
-      ?profilePage()
+  if(page==="profile")
+    renderProfile();
 
-    :other();
+  if(page==="resume")
+    renderResume();
 
+  if(page==="interview")
+    renderInterview();
 
-  shell(body);
+  if(page==="recruiter")
+    renderRecruiter();
 
-  wire();
+  if(page==="admin")
+    renderAdmin();
+
 }
 
 
-/* =========================
-   TOAST
-========================= */
+/* =====================================================
+HOME
+===================================================== */
 
-function toast(s){
+function renderHome(){
 
-  let t=$("#toast");
+  document
+    .getElementById("content")
+    .innerHTML = `
 
-  if(t){
+      <section class="hero">
 
-    t.textContent=s;
+        <h1>
+          Build your career with CareerNexa 🚀
+        </h1>
 
-    t.classList.remove("hidden");
+        <p>
+          Find opportunities, apply to companies,
+          track applications and prepare for interviews.
+        </p>
 
-    setTimeout(
-      ()=>t.classList.add("hidden"),
-      3500
+        <div class="search">
+
+          <input
+            id="homeSearch"
+            placeholder="Search jobs, skills, companies...">
+
+          <button
+            class="btn primary"
+            onclick="searchHome()">
+
+            Search Jobs
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <h2 style="margin-bottom:18px">
+        Latest Jobs
+      </h2>
+
+
+      <div class="grid">
+
+        ${
+          jobs
+            .slice(0,6)
+            .map(jobCard)
+            .join("")
+        }
+
+      </div>
+
+    `;
+
+}
+
+
+function searchHome(){
+
+  const value =
+    document
+      .getElementById("homeSearch")
+      .value;
+
+  renderJobs(value);
+
+}
+
+
+/* =====================================================
+JOBS
+===================================================== */
+
+function renderJobs(search=""){
+
+  const filtered =
+    jobs.filter(job=>{
+
+      if(!search)
+        return true;
+
+      const text =
+        `
+        ${job.title}
+        ${job.company}
+        ${job.skills}
+        ${job.location}
+        `
+        .toLowerCase();
+
+      return text.includes(
+        search.toLowerCase()
+      );
+
+    });
+
+
+  document
+    .getElementById("content")
+    .innerHTML = `
+
+      <h1 style="margin-bottom:20px">
+        Find Jobs 💼
+      </h1>
+
+
+      <div
+        class="card"
+        style="margin-bottom:20px">
+
+        <input
+          id="jobSearch"
+          value="${escapeHtml(search)}"
+          oninput="renderJobs(this.value)"
+          placeholder="Search by role, company, skill or location..."
+          style="
+            width:100%;
+            padding:14px;
+            border:1px solid #ddd;
+            border-radius:10px;
+          ">
+
+      </div>
+
+
+      <div class="grid">
+
+        ${
+          filtered.length
+          ? filtered.map(jobCard).join("")
+          : `
+            <div class="card">
+
+              <h3>
+                No jobs found
+              </h3>
+
+              <p class="muted">
+                Try another search.
+              </p>
+
+            </div>
+          `
+        }
+
+      </div>
+
+    `;
+
+}
+
+
+function jobCard(job){
+
+  const isSaved =
+    saved.includes(
+      Number(job.id)
+    );
+
+  const applied =
+    applications.some(
+      a =>
+        Number(a.job_id) ===
+        Number(job.id)
+    );
+
+
+  return `
+
+    <div class="card">
+
+      <h3>
+        ${escapeHtml(job.title)}
+      </h3>
+
+      <p>
+        🏢
+        ${escapeHtml(job.company)}
+      </p>
+
+      <p class="muted">
+        📍
+        ${escapeHtml(
+          job.location ||
+          "Not specified"
+        )}
+      </p>
+
+      <p class="muted">
+        💰
+        ${escapeHtml(
+          job.salary ||
+          "Salary not disclosed"
+        )}
+      </p>
+
+
+      <div>
+
+        <span class="tag">
+          ${escapeHtml(
+            job.level ||
+            "Fresher"
+          )}
+        </span>
+
+        <span class="tag">
+          ${escapeHtml(
+            job.type ||
+            "Full Time"
+          )}
+        </span>
+
+      </div>
+
+
+      <p style="margin-top:10px">
+        ${escapeHtml(
+          job.description ||
+          ""
+        )}
+      </p>
+
+
+      <p style="margin-top:10px">
+
+        <strong>
+          Skills:
+        </strong>
+
+        ${escapeHtml(
+          job.skills ||
+          "Not specified"
+        )}
+
+      </p>
+
+
+      ${
+        me.role === "candidate"
+        ? `
+
+          <button
+            class="btn secondary"
+            onclick="saveJob(${job.id})">
+
+            ${
+              isSaved
+              ? "❤️ Saved"
+              : "🤍 Save"
+            }
+
+          </button>
+
+
+          <button
+            class="btn primary"
+            onclick="applyJob(${job.id},this)"
+            ${applied ? "disabled" : ""}>
+
+            ${
+              applied
+              ? "✅ Applied"
+              : "Apply Now"
+            }
+
+          </button>
+
+        `
+        : ""
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+APPLY
+===================================================== */
+
+async function applyJob(jobId,button){
+
+  try{
+
+    button.disabled=true;
+
+    button.textContent=
+      "Applying...";
+
+
+    const result =
+      await api(
+        "/api/applications/" +
+        jobId,
+        {
+          method:"POST"
+        }
+      );
+
+
+    await loadData();
+
+
+    toast(
+      result.smsSent
+      ? "✅ Applied! SMS sent to your mobile."
+      : "✅ Application submitted."
+    );
+
+
+    renderJobs();
+
+  }
+  catch(error){
+
+    button.disabled=false;
+
+    button.textContent=
+      "Apply Now";
+
+    toast(
+      "❌ " +
+      error.message
     );
 
   }
@@ -1380,592 +1360,1571 @@ function toast(s){
 }
 
 
-/* =========================
-   EVENT HANDLERS
-========================= */
+/* =====================================================
+SAVE
+===================================================== */
 
-function wire(){
+async function saveJob(jobId){
 
-  /* NAVIGATION */
+  try{
 
-  document
-    .querySelectorAll("[data-page]")
-    .forEach(b=>{
-
-      b.onclick=()=>{
-        page=b.dataset.page;
-        render();
-      };
-
-    });
-
-
-  /* SAVE JOB */
-
-  document
-    .querySelectorAll("[data-save]")
-    .forEach(b=>{
-
-      b.onclick=async()=>{
-
-        try{
-
-          await api(
-            "/api/saved/"+b.dataset.save,
-            {
-              method:"POST"
-            }
-          );
-
-          await load();
-
-          render();
-
-          toast("Job saved successfully");
-
-        }catch(e){
-
-          toast(e.message);
-
+    const result =
+      await api(
+        "/api/saved/" +
+        jobId,
+        {
+          method:"POST"
         }
-
-      };
-
-    });
-
-
-  /* =========================
-     APPLY JOB - FIXED
-  ========================= */
-
-  document
-    .querySelectorAll("[data-apply]")
-    .forEach(b=>{
-
-      b.onclick=async()=>{
-
-        try{
-
-          /* Prevent double clicking */
-
-          b.disabled=true;
-
-          b.textContent="Applying...";
-
-
-          /* Send application */
-
-          await api(
-            "/api/applications/"+b.dataset.apply,
-            {
-              method:"POST"
-            }
-          );
-
-
-          /* Reload applications */
-
-          await load();
-
-
-          /* Re-render with Applied button */
-
-          render();
-
-
-          /* Show success message */
-
-          setTimeout(
-            ()=>{
-              toast("✅ Application added to tracker");
-            },
-            50
-          );
-
-
-        }catch(e){
-
-          /* Restore button */
-
-          b.disabled=false;
-
-          b.textContent="Apply / Track";
-
-          toast(
-            "❌ "+e.message
-          );
-
-        }
-
-      };
-
-    });
-
-
-  /* MATCH */
-
-  document
-    .querySelectorAll("[data-match]")
-    .forEach(b=>{
-
-      b.onclick=()=>{
-
-        let j=jobs.find(
-          x=>x.id===+b.dataset.match
-        );
-
-        let have=
-          (profile.skills||"")
-          .toLowerCase()
-          .split(",")
-          .map(x=>x.trim());
-
-
-        let match=j.skills.filter(
-          x=>have.includes(
-            x.toLowerCase()
-          )
-        );
-
-
-        let miss=j.skills.filter(
-          x=>!have.includes(
-            x.toLowerCase()
-          )
-        );
-
-
-        alert(
-          `${j.title}\n`+
-          `Skill overlap: ${
-            Math.round(
-              match.length/
-              j.skills.length*
-              100
-            )
-          }%\n`+
-          `Matched: ${
-            match.join(", ")||"None"
-          }\n`+
-          `Missing: ${
-            miss.join(", ")||"None"
-          }`
-        );
-
-      };
-
-    });
-
-
-  /* APPLICATION STATUS */
-
-  document
-    .querySelectorAll("[data-status]")
-    .forEach(s=>{
-
-      s.onchange=async()=>{
-
-        try{
-
-          await api(
-            "/api/applications/"+s.dataset.status,
-            {
-              method:"PATCH",
-              body:JSON.stringify({
-                status:s.value
-              })
-            }
-          );
-
-          await load();
-
-          toast("Status updated");
-
-        }catch(e){
-
-          toast(e.message);
-
-        }
-
-      };
-
-    });
-
-
-  /* DELETE APPLICATION */
-
-  document
-    .querySelectorAll("[data-delete]")
-    .forEach(b=>{
-
-      b.onclick=async()=>{
-
-        try{
-
-          await api(
-            "/api/applications/"+b.dataset.delete,
-            {
-              method:"DELETE"
-            }
-          );
-
-          await load();
-
-          render();
-
-          toast("Application removed");
-
-        }catch(e){
-
-          toast(e.message);
-
-        }
-
-      };
-
-    });
-
-
-  /* SEARCH */
-
-  if($("#search"))
-
-    $("#search").onclick=async()=>{
-
-      try{
-
-        let p=new URLSearchParams({
-
-          q:$("#q").value,
-
-          level:$("#level").value,
-
-          location:$("#loc").value,
-
-          type:$("#type").value
-
-        });
-
-
-        let list=await api(
-          "/api/jobs?"+p
-        );
-
-
-        $("#results").innerHTML=
-          list.map(job).join("")
-          ||
-          '<div class="card">No matching jobs</div>';
-
-
-        wire();
-
-      }catch(e){
-
-        toast(e.message);
-
-      }
-
-    };
-
-
-  /* PROFILE */
-
-  if($("#pf"))
-
-    $("#pf").onsubmit=async e=>{
-
-      e.preventDefault();
-
-      try{
-
-        profile=await api(
-          "/api/profile",
-          {
-            method:"PUT",
-            body:JSON.stringify(
-              Object.fromEntries(
-                new FormData(e.target)
-              )
-            )
-          }
-        );
-
-        user.name=profile.name;
-
-        toast("Profile saved");
-
-        render();
-
-      }catch(e){
-
-        toast(e.message);
-
-      }
-
-    };
-
-
-  /* RESUME */
-
-  if($("#resume"))
-
-    $("#resume").onsubmit=async e=>{
-
-      e.preventDefault();
-
-      let fd=new FormData(e.target);
-
-      $("#out").textContent=
-        "Analyzing…";
-
-
-      try{
-
-        let d=await api(
-          "/api/resume",
-          {
-            method:"POST",
-            body:fd
-          }
-        );
-
-
-        $("#out").innerHTML=`
-
-          <div class="notice ok">
-
-            Score:
-            ${d.analysis.score}/100
-
-            <br>
-
-            ${esc(d.note)}
-
-          </div>
-
-          ${
-            d.analysis.checks
-              .map(x=>`
-
-                <div class="list">
-
-                  ${esc(x[0])}
-
-                  <b>
-                    ${x[1]?"Found":"Review"}
-                  </b>
-
-                </div>
-
-              `)
-              .join("")
-          }
-
-          <p>
-            ${
-              d.analysis.suggestions
-                .map(esc)
-                .join("<br>")
-            }
-          </p>
-
-        `;
-
-      }catch(x){
-
-        $("#out").textContent=
-          x.message;
-
-      }
-
-    };
-
-
-  /* INTERVIEW */
-
-  if($("#next")){
-
-    const setq=()=>{
-
-      $("#question").textContent=
-        `Question ${qi+1}/5: ${questions[qi]}`;
-
-      $("#answer").value=
-        answers[qi]||"";
-
-    };
-
-
-    setq();
-
-
-    $("#next").onclick=async()=>{
-
-      answers[qi]=
-        $("#answer").value;
-
-
-      if(qi<4){
-
-        qi++;
-
-        setq();
-
-      }else{
-
-        try{
-
-          let d=await api(
-            "/api/interview",
-            {
-              method:"POST",
-              body:JSON.stringify({
-                role:profile.role,
-                answers
-              })
-            }
-          );
-
-
-          $("#questions")
-            .classList
-            .add("hidden");
-
-
-          $("#result").innerHTML=`
-
-            <h2>
-              Practice score:
-              ${d.score}/100
-            </h2>
-
-            <p>
-              ${esc(d.feedback)}
-            </p>
-
-            <button
-              class="primary"
-              id="again"
-            >
-              Practice again
-            </button>
-
-          `;
-
-
-          $("#again").onclick=()=>{
-
-            qi=0;
-
-            answers=[];
-
-            render();
-
-          };
-
-
-        }catch(e){
-
-          toast(e.message);
-
-        }
-
-      }
-
-    };
-
-  }
-
-
-  /* SKILL GAP */
-
-  if($("#compare"))
-
-    $("#compare").onclick=()=>{
-
-      let h=
-        $("#have")
-        .value
-        .toLowerCase()
-        .split(",")
-        .map(x=>x.trim());
-
-
-      let n=
-        $("#need")
-        .value
-        .split(",")
-        .map(x=>x.trim());
-
-
-      let m=n.filter(
-        x=>!h.includes(
-          x.toLowerCase()
-        )
       );
 
 
-      $("#gap").innerHTML=`
-
-        <div class="notice">
-          Matched
-          ${n.length-m.length}/${n.length}
-          skills
-        </div>
-
-        <b>
-          Skills to learn:
-        </b>
-
-        ${
-          m.map(esc).join(", ")
-          ||
-          "No gaps found"
-        }
-
-      `;
-
-    };
+    await loadData();
 
 
-  /* AI COACH */
+    toast(
+      result.saved
+      ? "❤️ Job saved"
+      : "Job removed from saved"
+    );
 
-  if($("#coach"))
 
-    $("#coach").onsubmit=e=>{
+    renderJobs();
 
-      e.preventDefault();
+  }
+  catch(error){
 
-      $("#coachout").innerHTML=`
+    toast(
+      "❌ " +
+      error.message
+    );
 
-        <div class="notice">
-
-          1. Pick one target role.
-          <br>
-          2. Compare 5 job descriptions.
-          <br>
-          3. Choose one missing skill.
-          <br>
-          4. Build a project that proves it.
-          <br>
-          5. Update your resume and apply
-          to suitable roles.
-
-        </div>
-
-      `;
-
-    };
+  }
 
 }
 
 
-/* =========================
-   START APPLICATION
-========================= */
+/* =====================================================
+APPLICATIONS
+===================================================== */
 
-render();
+function renderApplications(){
+
+  document
+    .getElementById("content")
+    .innerHTML = `
+
+      <h1 style="margin-bottom:20px">
+        Application Tracker 📋
+      </h1>
+
+
+      <div class="grid">
+
+        ${
+          applications.length
+          ? applications
+              .map(applicationCard)
+              .join("")
+          : `
+
+            <div class="card">
+
+              <h3>
+                No applications yet
+              </h3>
+
+              <p class="muted">
+                Apply to a job to start tracking
+                your career journey.
+              </p>
+
+            </div>
+
+          `
+        }
+
+      </div>
+
+    `;
+
+}
+
+
+function applicationCard(a){
+
+  return `
+
+    <div class="card">
+
+      <h3>
+        ${escapeHtml(a.title)}
+      </h3>
+
+      <p>
+        🏢
+        ${escapeHtml(a.company)}
+      </p>
+
+      <p class="muted">
+        📍
+        ${escapeHtml(
+          a.location || ""
+        )}
+      </p>
+
+
+      <div style="margin-top:15px">
+
+        <span class="tag">
+          ${escapeHtml(a.status)}
+        </span>
+
+      </div>
+
+
+      <p
+        class="muted"
+        style="margin-top:10px">
+
+        Applied:
+        ${new Date(
+          a.created_at
+        ).toLocaleString()}
+
+      </p>
+
+
+      ${
+        a.recruiter_note
+        ? `
+
+          <div
+            class="card"
+            style="
+              margin-top:12px;
+              background:#faf7ff;
+            ">
+
+            <strong>
+              Recruiter note
+            </strong>
+
+            <p>
+              ${escapeHtml(
+                a.recruiter_note
+              )}
+            </p>
+
+          </div>
+
+        `
+        : ""
+      }
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+SAVED
+===================================================== */
+
+function renderSaved(){
+
+  const savedJobs =
+    jobs.filter(
+      j =>
+        saved.includes(
+          Number(j.id)
+        )
+    );
+
+
+  document
+    .getElementById("content")
+    .innerHTML = `
+
+      <h1 style="margin-bottom:20px">
+        Saved Jobs ❤️
+      </h1>
+
+
+      <div class="grid">
+
+        ${
+          savedJobs.length
+          ? savedJobs
+              .map(jobCard)
+              .join("")
+          : `
+
+            <div class="card">
+
+              <h3>
+                No saved jobs
+              </h3>
+
+              <p class="muted">
+                Save interesting jobs
+                and find them here.
+              </p>
+
+            </div>
+
+          `
+        }
+
+      </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+PROFILE
+===================================================== */
+
+async function renderProfile(){
+
+  try{
+
+    const profile =
+      await api("/api/profile");
+
+
+    document
+      .getElementById("content")
+      .innerHTML = `
+
+        <h1 style="margin-bottom:20px">
+          My Profile 👤
+        </h1>
+
+
+        <div class="form">
+
+          <div class="field">
+            <label>Name</label>
+
+            <input
+              id="pName"
+              value="${escapeHtml(
+                profile.name || ""
+              )}">
+          </div>
+
+
+          <div class="field">
+            <label>Mobile</label>
+
+            <input
+              id="pMobile"
+              value="${escapeHtml(
+                profile.mobile || ""
+              )}">
+          </div>
+
+
+          <div class="field">
+            <label>Headline</label>
+
+            <input
+              id="pHeadline"
+              value="${escapeHtml(
+                profile.headline || ""
+              )}"
+              placeholder="Frontend Developer | React Developer">
+          </div>
+
+
+          <div class="field">
+            <label>Skills</label>
+
+            <input
+              id="pSkills"
+              value="${escapeHtml(
+                profile.skills || ""
+              )}"
+              placeholder="React, JavaScript, SQL">
+          </div>
+
+
+          <div class="field">
+            <label>Experience</label>
+
+            <input
+              id="pExperience"
+              value="${escapeHtml(
+                profile.experience || ""
+              )}"
+              placeholder="Fresher / 1 year / 2 years">
+          </div>
+
+
+          <div class="field">
+            <label>Education</label>
+
+            <input
+              id="pEducation"
+              value="${escapeHtml(
+                profile.education || ""
+              )}">
+          </div>
+
+
+          <div class="field">
+            <label>Location</label>
+
+            <input
+              id="pLocation"
+              value="${escapeHtml(
+                profile.location || ""
+              )}">
+          </div>
+
+
+          <div class="field">
+            <label>Bio</label>
+
+            <textarea
+              id="pBio">${escapeHtml(
+                profile.bio || ""
+              )}</textarea>
+          </div>
+
+
+          <button
+            class="btn primary"
+            onclick="saveProfile()">
+
+            Save Profile
+
+          </button>
+
+        </div>
+
+      `;
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+async function saveProfile(){
+
+  try{
+
+    await api(
+      "/api/profile",
+      {
+        method:"PUT",
+        body:JSON.stringify({
+
+          name:
+            document
+              .getElementById("pName")
+              .value,
+
+          mobile:
+            document
+              .getElementById("pMobile")
+              .value,
+
+          headline:
+            document
+              .getElementById("pHeadline")
+              .value,
+
+          skills:
+            document
+              .getElementById("pSkills")
+              .value,
+
+          experience:
+            document
+              .getElementById("pExperience")
+              .value,
+
+          education:
+            document
+              .getElementById("pEducation")
+              .value,
+
+          location:
+            document
+              .getElementById("pLocation")
+              .value,
+
+          bio:
+            document
+              .getElementById("pBio")
+              .value
+
+        })
+      }
+    );
+
+
+    toast(
+      "✅ Profile updated"
+    );
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+RESUME
+===================================================== */
+
+function renderResume(){
+
+  document
+    .getElementById("content")
+    .innerHTML = `
+
+      <h1 style="margin-bottom:20px">
+        Resume Analyzer 📄
+      </h1>
+
+
+      <div class="card">
+
+        <p class="muted">
+
+          Upload your resume and CareerNexa
+          will identify common improvement areas.
+
+        </p>
+
+
+        <div style="margin-top:20px">
+
+          <input
+            id="resumeFile"
+            type="file"
+            accept=".pdf,.doc,.docx">
+
+        </div>
+
+
+        <button
+          class="btn primary"
+          onclick="uploadResume()">
+
+          Analyze Resume
+
+        </button>
+
+
+        <div
+          id="resumeResult"
+          style="margin-top:20px">
+
+        </div>
+
+      </div>
+
+  `;
+
+}
+
+
+async function uploadResume(){
+
+  const file =
+    document
+      .getElementById("resumeFile")
+      .files[0];
+
+
+  if(!file){
+
+    toast(
+      "Please select a resume"
+    );
+
+    return;
+
+  }
+
+
+  const formData =
+    new FormData();
+
+  formData.append(
+    "resume",
+    file
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/resume",
+        {
+          method:"POST",
+
+          headers:{
+            Authorization:
+              "Bearer " +
+              token
+          },
+
+          body:formData
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        result.error
+      );
+
+    }
+
+
+    document
+      .getElementById("resumeResult")
+      .innerHTML = `
+
+        <div class="card">
+
+          <h2>
+            Resume Score:
+            ${result.analysis.score}/100
+          </h2>
+
+
+          <h3 style="margin-top:15px">
+            Strengths
+          </h3>
+
+          <ul>
+
+            ${
+              result.analysis.strengths
+                .map(
+                  x =>
+                    `<li>${escapeHtml(x)}</li>`
+                )
+                .join("")
+            }
+
+          </ul>
+
+
+          <h3 style="margin-top:15px">
+            Issues
+          </h3>
+
+          <ul>
+
+            ${
+              result.analysis.issues
+                .map(
+                  x =>
+                    `<li>${escapeHtml(x)}</li>`
+                )
+                .join("")
+            }
+
+          </ul>
+
+
+          <h3 style="margin-top:15px">
+            Suggestions
+          </h3>
+
+          <ul>
+
+            ${
+              result.analysis.suggestions
+                .map(
+                  x =>
+                    `<li>${escapeHtml(x)}</li>`
+                )
+                .join("")
+            }
+
+          </ul>
+
+        </div>
+
+      `;
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+MOCK INTERVIEW
+===================================================== */
+
+function renderInterview(){
+
+  document
+    .getElementById("content")
+    .innerHTML = `
+
+      <h1 style="margin-bottom:20px">
+        AI Mock Interview 🎤
+      </h1>
+
+
+      <div class="card">
+
+        <p>
+          Practice interview questions
+          and receive instant feedback.
+        </p>
+
+
+        <button
+          class="btn primary"
+          onclick="newQuestion()">
+
+          Start Interview
+
+        </button>
+
+
+        <div
+          id="interviewArea"
+          style="margin-top:20px">
+
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+
+async function newQuestion(){
+
+  try{
+
+    const result =
+      await api(
+        "/api/mock-interview",
+        {
+          method:"POST"
+        }
+      );
+
+
+    document
+      .getElementById("interviewArea")
+      .innerHTML = `
+
+        <div class="card">
+
+          <h3>
+            ${escapeHtml(
+              result.question
+            )}
+          </h3>
+
+
+          <textarea
+            id="answer"
+            style="
+              width:100%;
+              min-height:150px;
+              margin-top:15px;
+              padding:12px;
+              border:1px solid #ddd;
+              border-radius:10px;
+            "
+            placeholder="Type your answer...">
+          </textarea>
+
+
+          <button
+            class="btn primary"
+            onclick="submitAnswer()">
+
+            Submit Answer
+
+          </button>
+
+        </div>
+
+      `;
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+async function submitAnswer(){
+
+  const answer =
+    document
+      .getElementById("answer")
+      .value;
+
+
+  try{
+
+    const result =
+      await api(
+        "/api/mock-interview",
+        {
+          method:"POST",
+
+          body:JSON.stringify({
+            answer
+          })
+        }
+      );
+
+
+    document
+      .getElementById("interviewArea")
+      .innerHTML += `
+
+        <div
+          class="card"
+          style="margin-top:15px">
+
+          <h3>
+            Score:
+            ${result.score}/100
+          </h3>
+
+          <p>
+            ${escapeHtml(
+              result.feedback
+            )}
+          </p>
+
+
+          <button
+            class="btn secondary"
+            onclick="newQuestion()">
+
+            Next Question
+
+          </button>
+
+        </div>
+
+      `;
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+RECRUITER
+===================================================== */
+
+async function renderRecruiter(){
+
+  try{
+
+    const recruiterJobs =
+      await api(
+        "/api/recruiter/jobs"
+      );
+
+
+    const applicants =
+      await api(
+        "/api/recruiter/applications"
+      );
+
+
+    document
+      .getElementById("content")
+      .innerHTML = `
+
+        <h1 style="margin-bottom:20px">
+          Recruiter Dashboard 🏢
+        </h1>
+
+
+        <div class="grid">
+
+          <div class="card">
+
+            <h3>
+              My Jobs
+            </h3>
+
+            <h1>
+              ${recruiterJobs.length}
+            </h1>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              Applications
+            </h3>
+
+            <h1>
+              ${applicants.length}
+            </h1>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="form"
+          style="margin-top:20px">
+
+          <h2>
+            Post a Job
+          </h2>
+
+
+          <div class="field">
+            <label>Job Title</label>
+            <input id="jTitle">
+          </div>
+
+
+          <div class="field">
+            <label>Company</label>
+            <input id="jCompany">
+          </div>
+
+
+          <div class="field">
+            <label>Location</label>
+            <input id="jLocation">
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Experience Level
+            </label>
+
+            <select id="jLevel">
+
+              <option>
+                Fresher
+              </option>
+
+              <option>
+                0-1 years
+              </option>
+
+              <option>
+                1-2 years
+              </option>
+
+              <option>
+                2+ years
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Job Type
+            </label>
+
+            <select id="jType">
+
+              <option>
+                Full Time
+              </option>
+
+              <option>
+                Part Time
+              </option>
+
+              <option>
+                Internship
+              </option>
+
+              <option>
+                Contract
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+            <label>Salary</label>
+            <input id="jSalary">
+          </div>
+
+
+          <div class="field">
+            <label>Skills</label>
+
+            <input
+              id="jSkills"
+              placeholder="React, Node.js, SQL">
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Description
+            </label>
+
+            <textarea
+              id="jDescription">
+            </textarea>
+
+          </div>
+
+
+          <button
+            class="btn primary"
+            onclick="postJob()">
+
+            Publish Job
+
+          </button>
+
+        </div>
+
+
+        <h2 style="margin-top:30px">
+          Applicants
+        </h2>
+
+
+        <div
+          class="grid"
+          style="margin-top:15px">
+
+          ${
+            applicants.length
+            ? applicants
+                .map(recruiterApplicant)
+                .join("")
+            : `
+              <div class="card">
+                No applications yet.
+              </div>
+            `
+          }
+
+        </div>
+
+      `;
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+async function postJob(){
+
+  try{
+
+    await api(
+      "/api/recruiter/jobs",
+      {
+        method:"POST",
+
+        body:JSON.stringify({
+
+          title:
+            document
+              .getElementById("jTitle")
+              .value,
+
+          company:
+            document
+              .getElementById("jCompany")
+              .value,
+
+          location:
+            document
+              .getElementById("jLocation")
+              .value,
+
+          level:
+            document
+              .getElementById("jLevel")
+              .value,
+
+          type:
+            document
+              .getElementById("jType")
+              .value,
+
+          salary:
+            document
+              .getElementById("jSalary")
+              .value,
+
+          skills:
+            document
+              .getElementById("jSkills")
+              .value,
+
+          description:
+            document
+              .getElementById("jDescription")
+              .value
+
+        })
+      }
+    );
+
+
+    toast(
+      "✅ Job posted. Waiting for admin approval."
+    );
+
+
+    renderRecruiter();
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+function recruiterApplicant(a){
+
+  return `
+
+    <div class="card">
+
+      <h3>
+        ${escapeHtml(
+          a.candidate_name
+        )}
+      </h3>
+
+
+      <p>
+
+        Applied for:
+        <strong>
+          ${escapeHtml(
+            a.job_title
+          )}
+        </strong>
+
+      </p>
+
+
+      <p class="muted">
+        📧
+        ${escapeHtml(
+          a.candidate_email
+        )}
+      </p>
+
+
+      <p class="muted">
+        📱
+        ${escapeHtml(
+          a.candidate_mobile ||
+          ""
+        )}
+      </p>
+
+
+      <p>
+
+        <strong>
+          Skills:
+        </strong>
+
+        ${escapeHtml(
+          a.skills ||
+          "Not provided"
+        )}
+
+      </p>
+
+
+      <p>
+
+        <strong>
+          Experience:
+        </strong>
+
+        ${escapeHtml(
+          a.experience ||
+          "Not provided"
+        )}
+
+      </p>
+
+
+      <span class="tag">
+        ${escapeHtml(
+          a.status
+        )}
+      </span>
+
+
+      <div style="margin-top:10px">
+
+        <select id="status-${a.id}">
+
+          <option>
+            Applied
+          </option>
+
+          <option>
+            Under Review
+          </option>
+
+          <option>
+            Shortlisted
+          </option>
+
+          <option>
+            Assessment
+          </option>
+
+          <option>
+            Interview Scheduled
+          </option>
+
+          <option>
+            Selected
+          </option>
+
+          <option>
+            Rejected
+          </option>
+
+        </select>
+
+
+        <button
+          class="btn primary"
+          onclick="updateApplicant(${a.id})">
+
+          Update Status
+
+        </button>
+
+
+        <button
+          class="btn secondary"
+          onclick="scheduleInterview(${a.id})">
+
+          Schedule Interview
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+async function updateApplicant(id){
+
+  const status =
+    document
+      .getElementById(
+        "status-" + id
+      )
+      .value;
+
+
+  try{
+
+    const result =
+      await api(
+        "/api/recruiter/applications/" +
+        id,
+        {
+          method:"PATCH",
+
+          body:JSON.stringify({
+            status
+          })
+        }
+      );
+
+
+    toast(
+      result.smsSent
+      ? "✅ Status updated + SMS sent"
+      : "✅ Status updated"
+    );
+
+
+    renderRecruiter();
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+async function scheduleInterview(id){
+
+  const date =
+    prompt(
+      "Enter interview date/time\nExample: 2026-10-15T15:00"
+    );
+
+
+  if(!date)
+    return;
+
+
+  const mode =
+    prompt(
+      "Mode: Online / Offline",
+      "Online"
+    );
+
+
+  const link =
+    prompt(
+      "Meeting link (optional)"
+    );
+
+
+  try{
+
+    const result =
+      await api(
+        "/api/recruiter/applications/" +
+        id +
+        "/interview",
+        {
+          method:"POST",
+
+          body:JSON.stringify({
+
+            scheduled_at:
+              date,
+
+            mode:
+              mode ||
+              "Online",
+
+            meeting_link:
+              link ||
+              "",
+
+            note:
+              "Interview scheduled by recruiter"
+
+          })
+        }
+      );
+
+
+    toast(
+      result.smsSent
+      ? "📅 Interview scheduled + SMS sent"
+      : "📅 Interview scheduled"
+    );
+
+
+    renderRecruiter();
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+ADMIN
+===================================================== */
+
+async function renderAdmin(){
+
+  try{
+
+    const jobs =
+      await api(
+        "/api/admin/jobs"
+      );
+
+
+    document
+      .getElementById("content")
+      .innerHTML = `
+
+        <h1 style="margin-bottom:20px">
+          Admin Dashboard 🛡️
+        </h1>
+
+
+        <div class="grid">
+
+          ${
+            jobs
+              .map(adminJob)
+              .join("")
+          }
+
+        </div>
+
+      `;
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+function adminJob(job){
+
+  return `
+
+    <div class="card">
+
+      <h3>
+        ${escapeHtml(
+          job.title
+        )}
+      </h3>
+
+
+      <p>
+        🏢
+        ${escapeHtml(
+          job.company
+        )}
+      </p>
+
+
+      <p class="muted">
+
+        Recruiter:
+        ${escapeHtml(
+          job.recruiter_name ||
+          "Admin"
+        )}
+
+      </p>
+
+
+      <span class="tag">
+        ${escapeHtml(
+          job.status
+        )}
+      </span>
+
+
+      <div>
+
+        <button
+          class="btn success"
+          onclick="reviewJob(${job.id},'approved')">
+
+          Approve
+
+        </button>
+
+
+        <button
+          class="btn danger"
+          onclick="reviewJob(${job.id},'rejected')">
+
+          Reject
+
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+async function reviewJob(id,status){
+
+  try{
+
+    await api(
+      "/api/admin/jobs/" +
+      id,
+      {
+        method:"PATCH",
+
+        body:JSON.stringify({
+          status
+        })
+      }
+    );
+
+
+    toast(
+      status === "approved"
+      ? "✅ Job approved"
+      : "❌ Job rejected"
+    );
+
+
+    renderAdmin();
+
+  }
+  catch(error){
+
+    toast(
+      "❌ " +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+HELPERS
+===================================================== */
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
+
+}
+
+
+/* =====================================================
+START
+===================================================== */
+
+init();
 
 </script>
 
